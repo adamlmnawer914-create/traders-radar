@@ -12,14 +12,15 @@ export async function POST(req: Request) {
 
     const clerkUser = await currentUser();
     const body = await req.json();
-    const planId = (body.planId as PlanType) || "PRO";
-    const interval = (body.interval as "monthly" | "yearly") || "monthly";
+    const planId = (body.planId as PlanType) || "STARTER";
 
-    if (!PLANS[planId] || planId === "FREE") {
+    if (!PLANS[planId]) {
       return NextResponse.json({ error: "باقة غير صالحة" }, { status: 400 });
     }
 
-    // Find DB user
+    const planConfig = PLANS[planId];
+
+    // Find or create DB user
     let user = await prisma.user.findUnique({
       where: { clerkId },
       include: { subscription: true },
@@ -39,9 +40,9 @@ export async function POST(req: Request) {
       });
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://traders-radar.vercel.app";
 
-    // If Stripe is fully configured with real keys
+    // If Stripe is configured with live/test key
     if (isStripeConfigured && stripe) {
       let stripeCustomerId = user.subscription?.stripeCustomerId;
 
@@ -58,39 +59,47 @@ export async function POST(req: Request) {
           create: {
             userId: user.id,
             stripeCustomerId,
-            plan: "FREE",
-            status: "ACTIVE",
+            plan: planId,
+            status: "INACTIVE",
           },
           update: { stripeCustomerId },
         });
       }
 
-      const planConfig = PLANS[planId];
-      const priceAmount = interval === "yearly" ? planConfig.priceYearly : planConfig.priceMonthly;
+      const isLifetime = planConfig.isLifetime;
 
-      const session = await stripe.checkout.sessions.create({
-        customer: stripeCustomerId,
-        mode: "subscription",
-                line_items: [
-          {
+      const lineItem = isLifetime
+        ? {
             price_data: {
-              currency: "sar",
+              currency: "usd",
               product_data: {
                 name: `رادار التجار - ${planConfig.name}`,
                 description: planConfig.description,
               },
-              unit_amount: priceAmount * 100, // in halalas (cents)
-              recurring: {
-                interval: interval === "yearly" ? "year" : "month",
-              },
+              unit_amount: planConfig.price * 100, // cents
             },
             quantity: 1,
-          },
-        ],
+          }
+        : {
+            price_data: {
+              currency: "usd",
+              product_data: {
+                name: `رادار التجار - ${planConfig.name}`,
+                description: planConfig.description,
+              },
+              unit_amount: planConfig.price * 100,
+              recurring: { interval: "month" as const },
+            },
+            quantity: 1,
+          };
+
+      const session = await stripe.checkout.sessions.create({
+        customer: stripeCustomerId,
+        mode: isLifetime ? "payment" : "subscription",
+        line_items: [lineItem],
         metadata: {
           userId: user.id,
           planId,
-          interval,
         },
         success_url: `${appUrl}/dashboard/billing?status=success&plan=${planId}`,
         cancel_url: `${appUrl}/dashboard/billing?status=cancelled`,
@@ -99,11 +108,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ url: session.url });
     }
 
-    // Seamless Fallback for Development/Demo Mode (when Stripe secret is test placeholder)
-    // Directly activates the plan in DB so the user can test all features immediately!
+    // Instant Activation in Demo Mode (when Stripe secret is test placeholder)
     const nextPeriod = new Date();
-    if (interval === "yearly") {
-      nextPeriod.setFullYear(nextPeriod.getFullYear() + 1);
+    if (planConfig.isLifetime) {
+      nextPeriod.setFullYear(nextPeriod.getFullYear() + 100); // 100 years lifetime
     } else {
       nextPeriod.setMonth(nextPeriod.getMonth() + 1);
     }
@@ -126,13 +134,10 @@ export async function POST(req: Request) {
     return NextResponse.json({
       url: `${appUrl}/dashboard/billing?status=success&plan=${planId}&mode=demo`,
       demo: true,
-      message: `تمت الترقية بنجاح إلى ${PLANS[planId].name} (وضع التجربة)`,
+      message: `تم تفعيل ${planConfig.name} بنجاح!`,
     });
   } catch (error: any) {
-    console.error("Stripe checkout error:", error);
-    return NextResponse.json(
-      { error: error?.message || "حدث خطأ أثناء إنشاء جلسة الدفع" },
-      { status: 500 }
-    );
+    console.error("Checkout error:", error);
+    return NextResponse.json({ error: error?.message || "حدث خطأ أثناء إنشاء جلسة الدفع" }, { status: 500 });
   }
 }
