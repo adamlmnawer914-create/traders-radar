@@ -93,17 +93,17 @@ export default async function HomePage() {
         <main>
           {/* ==================== HERO ==================== */}
           <section className="hero" id="home">
-            {/* Visual: 3D Dashboard */}
+            {/* Visual: Ultra-Luxurious 3D Glass Dashboard */}
             <div className="hero-visual" id="hero-visual">
               <img
                 className="img-dashboard"
                 id="dashboard-3d"
-                src="/assets/dash_raw.png"
-                alt="لوحة تحكم رادار التاجر ثلاثية الأبعاد"
+                src="/assets/dash_perfect@2x.png"
+                alt="لوحة تحكم رادار التاجر ثلاثية الأبعاد الفاخرة"
               />
             </div>
 
-            {/* 3D Shopping Bag positioned on the left side of the hero */}
+            {/* 3D Shopping Bag on bottom left */}
             <img
               className="img-bag"
               src="/assets/bag_perfect@2x.png"
@@ -340,11 +340,11 @@ export default async function HomePage() {
                 </article>
               </div>
 
-              {/* Stats Column */}
+              {/* Ultra-Luxurious 3D Stats Graphic */}
               <img
                 className="img-stats"
-                src="/assets/stats_raw.png"
-                alt="لوحة إحصائيات ونمو المبيعات ثلاثية الأبعاد"
+                src="/assets/stats_perfect@2x.png"
+                alt="لوحة تحليلات وإحصائيات ثلاثية الأبعاد"
               />
               <span className="pill pill-stats" id="pill-tools"><i className="dot"></i>أدوات نجاحك</span>
               <h2 className="stats-title">اعرف أين يذهب كل درهم</h2>
@@ -371,58 +371,76 @@ export default async function HomePage() {
             <div className="pricing-grid">
               {/* Starter $40 */}
               <div className="price-card">
-                <div>
-                  <h3 style={{ fontSize: "calc(20 * var(--u))", fontWeight: "800", color: "var(--navy)" }}>باقة البداية (Starter)</h3>
-                  <p style={{ fontSize: "calc(12 * var(--u))", color: "var(--muted)", marginTop: "calc(4 * var(--u))" }}>للمتاجر الناشئة ورواد التجارة</p>
-                  <div className="price-amount">$40 <small style={{ fontSize: "calc(13 * var(--u))", fontWeight: "normal", color: "var(--muted)" }}>/ شهر</small></div>
+                <div className="card-top">
+                  <div className="plan-header">
+                    <h3 className="plan-title">باقة البداية (Starter)</h3>
+                    <p className="plan-subtitle">للمتاجر الناشئة ورواد التجارة</p>
+                  </div>
+                  <div className="price-box">
+                    <span className="currency">$</span>
+                    <span className="amount">40</span>
+                    <span className="period">/ شهرياً</span>
+                  </div>
                   <ul className="price-features">
-                    <li>✓ متجر إلكتروني واحد متصل</li>
-                    <li>✓ حتى 250 منتج نشط في المخزن</li>
-                    <li>✓ حتى 1,000 طلب ومبيعة شهرياً</li>
-                    <li>✓ حساب تلقائي لصافي الأرباح</li>
-                    <li>✓ تنبيهات انخفاض المخزون</li>
+                    <li><span className="chk-icon">✓</span> متجر إلكتروني واحد متصل</li>
+                    <li><span className="chk-icon">✓</span> حتى 250 منتج نشط في المخزن</li>
+                    <li><span className="chk-icon">✓</span> حتى 1,000 طلب ومبيعة شهرياً</li>
+                    <li><span className="chk-icon">✓</span> حساب تلقائي لصافي الأرباح</li>
+                    <li><span className="chk-icon">✓</span> تنبيهات انخفاض المخزون</li>
                   </ul>
                 </div>
                 <Link href="/sign-up" className="price-btn">اشترك في البداية ($40)</Link>
               </div>
 
-              {/* Pro $150 */}
+              {/* Pro $150 (Featured) */}
               <div className="price-card featured">
-                <div>
-                  <div style={{ display: "inline-block", background: "linear-gradient(90deg, #6a3dff, #2b6bff)", color: "#fff", padding: "calc(3 * var(--u)) calc(12 * var(--u))", borderRadius: "calc(10 * var(--u))", fontSize: "calc(11 * var(--u))", fontWeight: "800", marginBottom: "calc(8 * var(--u))" }}>
+                <div className="card-top">
+                  <div className="popular-badge">
                     الأكثر طلباً ⭐
                   </div>
-                  <h3 style={{ fontSize: "calc(20 * var(--u))", fontWeight: "800", color: "var(--navy)" }}>باقة المحترفين (Pro)</h3>
-                  <p style={{ fontSize: "calc(12 * var(--u))", color: "var(--muted)", marginTop: "calc(4 * var(--u))" }}>للتجار النشطين وتوسيع المبيعات</p>
-                  <div className="price-amount">$150 <small style={{ fontSize: "calc(13 * var(--u))", fontWeight: "normal", color: "var(--muted)" }}>/ شهر</small></div>
+                  <div className="plan-header">
+                    <h3 className="plan-title">باقة المحترفين (Pro)</h3>
+                    <p className="plan-subtitle">للتجار النشطين وتوسيع المبيعات</p>
+                  </div>
+                  <div className="price-box">
+                    <span className="currency">$</span>
+                    <span className="amount">150</span>
+                    <span className="period">/ شهرياً</span>
+                  </div>
                   <ul className="price-features">
-                    <li>✓ حتى 5 متاجر إلكترونية متعددة</li>
-                    <li>✓ منتجات غير محدودة بالمخزن ∞</li>
-                    <li>✓ مبيعات وطلبات غير محدودة ∞</li>
-                    <li>✓ تحليلات أرباح ذكية وتنبؤات AI</li>
-                    <li>✓ تصدير التقارير إلى Excel و PDF</li>
-                    <li>✓ دعم فني ذو أولوية 24/7</li>
+                    <li><span className="chk-icon">✓</span> حتى 5 متاجر إلكترونية متعددة</li>
+                    <li><span className="chk-icon">✓</span> منتجات غير محدودة بالمخزن ∞</li>
+                    <li><span className="chk-icon">✓</span> مبيعات وطلبات غير محدودة ∞</li>
+                    <li><span className="chk-icon">✓</span> تحليلات أرباح ذكية وتنبؤات AI</li>
+                    <li><span className="chk-icon">✓</span> تصدير التقارير إلى Excel و PDF</li>
+                    <li><span className="chk-icon">✓</span> دعم فني ذو أولوية 24/7</li>
                   </ul>
                 </div>
-                <Link href="/sign-up" className="price-btn" style={{ background: "linear-gradient(90deg, #6a3dff 0%, #2b6bff 100%)" }}>اشترك في Pro ($150)</Link>
+                <Link href="/sign-up" className="price-btn price-btn-featured">اشترك في Pro ($150)</Link>
               </div>
 
               {/* VIP Lifetime $250 */}
               <div className="price-card">
-                <div>
-                  <div style={{ display: "inline-block", background: "rgba(157, 52, 253, 0.15)", color: "#9d34fd", padding: "calc(3 * var(--u)) calc(12 * var(--u))", borderRadius: "calc(10 * var(--u))", fontSize: "calc(11 * var(--u))", fontWeight: "800", marginBottom: "calc(8 * var(--u))" }}>
+                <div className="card-top">
+                  <div className="vip-badge">
                     دفعة واحدة للأبد 👑
                   </div>
-                  <h3 style={{ fontSize: "calc(20 * var(--u))", fontWeight: "800", color: "var(--navy)" }}>باقة VIP مدى الحياة</h3>
-                  <p style={{ fontSize: "calc(12 * var(--u))", color: "var(--muted)", marginTop: "calc(4 * var(--u))" }}>وصول كامل غير محدود للأبد</p>
-                  <div className="price-amount">$250 <small style={{ fontSize: "calc(13 * var(--u))", fontWeight: "bold", color: "#9d34fd" }}>مرة واحدة للأبد</small></div>
+                  <div className="plan-header">
+                    <h3 className="plan-title">باقة VIP مدى الحياة</h3>
+                    <p className="plan-subtitle">وصول كامل غير محدود للأبد</p>
+                  </div>
+                  <div className="price-box">
+                    <span className="currency">$</span>
+                    <span className="amount">250</span>
+                    <span className="period highlight">مرة واحدة للأبد</span>
+                  </div>
                   <ul className="price-features">
-                    <li>✓ وصول مدى الحياة بدون أي تجديد</li>
-                    <li>✓ متاجر إلكترونية غير محدودة ∞</li>
-                    <li>✓ منتجات ومبيعات غير محدودة ∞</li>
-                    <li>✓ ربط API مخصص ومباشر</li>
-                    <li>✓ مدير حساب مخصص على مدار الساعة</li>
-                    <li>✓ كافة التحديثات القادمة مجاناً للأبد</li>
+                    <li><span className="chk-icon">✓</span> وصول مدى الحياة بدون أي تجديد</li>
+                    <li><span className="chk-icon">✓</span> متاجر إلكترونية غير محدودة ∞</li>
+                    <li><span className="chk-icon">✓</span> منتجات ومبيعات غير محدودة ∞</li>
+                    <li><span className="chk-icon">✓</span> ربط API مخصص ومباشر</li>
+                    <li><span className="chk-icon">✓</span> مدير حساب مخصص على مدار الساعة</li>
+                    <li><span className="chk-icon">✓</span> كافة التحديثات القادمة مجاناً للأبد</li>
                   </ul>
                 </div>
                 <Link href="/sign-up" className="price-btn">امتلك VIP للأبد ($250)</Link>
@@ -433,20 +451,20 @@ export default async function HomePage() {
           {/* ==================== ABOUT & CONTACT FOOTER ==================== */}
           <footer className="site-footer" id="about">
             <div id="contact" style={{ textAlign: "center", padding: "calc(40 * var(--u)) 0 calc(24 * var(--u))", borderTop: "1px solid rgba(214, 222, 247, 0.6)" }}>
-              <h3 style={{ fontSize: "calc(18 * var(--u))", fontWeight: "800", color: "var(--navy)", marginBottom: "calc(8 * var(--u))" }}>
+              <h3 style={{ fontSize: "calc(16 * var(--u))", fontWeight: "800", color: "var(--navy)", marginBottom: "calc(8 * var(--u))" }}>
                 رادار التاجر | شريكك الاستراتيجي في التجارة الإلكترونية
               </h3>
-              <p style={{ fontSize: "calc(12 * var(--u))", color: "var(--muted)", maxWidth: "calc(600 * var(--u))", margin: "0 auto calc(16 * var(--u))", lineHeight: "1.7" }}>
+              <p style={{ fontSize: "calc(10.5 * var(--u))", color: "var(--muted)", maxWidth: "calc(550 * var(--u))", margin: "0 auto calc(16 * var(--u))", lineHeight: "1.7" }}>
                 نمكن رواد الأعمال وأصحاب المتاجر الإلكترونية من التحكم الكامل في مبيعاتهم ومخزونهم ومضاعفة أرباحهم الصافية عبر أحدث أدوات التحليل الذكية.
               </p>
-              <div style={{ display: "flex", justifyContent: "center", gap: "calc(16 * var(--u))", fontSize: "calc(12 * var(--u))", color: "var(--ink)", marginBottom: "calc(20 * var(--u))" }}>
+              <div style={{ display: "flex", justifyContent: "center", gap: "calc(16 * var(--u))", fontSize: "calc(10 * var(--u))", color: "var(--ink)", marginBottom: "calc(18 * var(--u))" }}>
                 <a href="mailto:support@traders-radar.com" style={{ color: "var(--blue)", fontWeight: "700" }}>support@traders-radar.com</a>
                 <span>•</span>
                 <span>دعم فني مباشر 24/7</span>
                 <span>•</span>
                 <span>حماية مشفرة 100%</span>
               </div>
-              <p style={{ fontSize: "calc(11 * var(--u))", color: "var(--muted)" }}>
+              <p style={{ fontSize: "calc(9.5 * var(--u))", color: "var(--muted)" }}>
                 © 2026 رادار التاجر (Trader's Radar). جميع الحقوق محفوظة.
               </p>
             </div>
