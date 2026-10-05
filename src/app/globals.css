@@ -877,3 +877,15 @@ img, svg { display: block; }
   .pricing-grid { grid-template-columns: 1fr; padding: 0 16px; }
   .price-card.featured { transform: scale(1); }
 }
+
+
+/* Section scroll padding for sticky navbar */
+#home, #features, #pricing, #about, #contact {
+  scroll-margin-top: calc(70 * var(--u));
+}
+
+@media (max-width: 899px) {
+  #home, #features, #pricing, #about, #contact {
+    scroll-margin-top: 80px;
+  }
+}
