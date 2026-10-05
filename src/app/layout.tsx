@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body className={`${cairo.className} bg-slate-950 text-slate-100 min-h-screen antialiased`}>
+      <body className={`${cairo.className} min-h-screen antialiased`}>
         <ClerkProvider localization={arSA}>
           {children}
         </ClerkProvider>

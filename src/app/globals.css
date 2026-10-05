@@ -5,7 +5,7 @@
    (calc(1 * var(--u)) = 1 reference pixel) then scaled with the viewport.
    =================================================== */
 
-/* Cairo loaded via next/font/google */
+/* Cairo loaded via next/font/google in layout.tsx */
 
 :root {
   --navy: #0b1245;
@@ -56,7 +56,8 @@ img, svg { display: block; }
   position: sticky;
   top: 0;
   height: 0;
-  z-index: 60;
+  z-index: 100;
+  pointer-events: none;
 }
 
 .navbar {
@@ -66,11 +67,13 @@ img, svg { display: block; }
   width: calc(802 * var(--u));
   height: calc(33 * var(--u));
   border-radius: calc(17 * var(--u));
-  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(250,252,255,.84));
+  background: linear-gradient(180deg, rgba(255,255,255,.95), rgba(250,252,255,.88));
   border: 1px solid rgba(255,255,255,.95);
   box-shadow: 0 calc(4 * var(--u)) calc(14 * var(--u)) rgba(110, 125, 205, .13), inset 0 0 0 1px rgba(221, 228, 248, .45);
   backdrop-filter: blur(14px) saturate(160%);
   -webkit-backdrop-filter: blur(14px) saturate(160%);
+  pointer-events: auto;
+  z-index: 101;
 }
 
 /* brand */
@@ -186,14 +189,15 @@ img, svg { display: block; }
   align-items: center;
   justify-content: center;
   font-size: calc(7.6 * var(--u));
-  font-weight: 700;
-  color: #fff;
-  background: var(--grad-btn);
+  font-weight: 800;
+  color: #ffffff !important;
+  background: linear-gradient(90deg, #2f73ff 0%, #5c5bfe 45%, #9e34fd 100%) !important;
   box-shadow: 0 calc(3 * var(--u)) calc(7 * var(--u)) rgba(125, 70, 250, .38), inset 0 1px 0 rgba(255,255,255,.3);
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  text-decoration: none !important;
   transition: transform .25s ease, box-shadow .25s ease;
 }
-
-.btn-start:hover { transform: translateY(calc(-1.5 * var(--u))); box-shadow: 0 calc(5 * var(--u)) calc(10 * var(--u)) rgba(125, 70, 250, .5); }
 
 .search-bar {
   width: calc(93 * var(--u));
@@ -250,8 +254,12 @@ img, svg { display: block; }
   top: calc(35 * var(--u));
   width: calc(545 * var(--u));
   height: calc(330 * var(--u));
-  z-index: 1;
+  z-index: 10;
   perspective: 1400px;
+  pointer-events: none !important;
+}
+.hero-visual * {
+  pointer-events: none !important;
 }
 
 .img-dashboard {
@@ -276,7 +284,8 @@ img, svg { display: block; }
   top: 0;
   width: calc(236 * var(--u));
   height: calc(352 * var(--u));
-  z-index: 4;
+  z-index: 50;
+  pointer-events: auto;
 }
 
 .hero-title {
@@ -330,6 +339,8 @@ img, svg { display: block; }
   display: flex;
   align-items: center;
   gap: calc(9 * var(--u));
+  z-index: 60;
+  pointer-events: auto;
 }
 
 .btn-video {
@@ -373,16 +384,31 @@ img, svg { display: block; }
   border-radius: calc(13 * var(--u));
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: calc(9 * var(--u));
-  padding-right: calc(11 * var(--u));
+  padding: 0 calc(12 * var(--u));
   font-size: calc(10 * var(--u));
-  font-weight: 700;
-  color: #fff;
-  background: var(--grad-cta);
-  box-shadow: 0 calc(6 * var(--u)) calc(13 * var(--u)) calc(-3 * var(--u)) rgba(86, 64, 250, .55), inset 0 1px 0 rgba(255,255,255,.35);
+  font-weight: 800;
+  color: #ffffff !important;
+  background: linear-gradient(90deg, #0287ff 0%, #0a5cf9 24%, #3d47fb 55%, #7a38fd 80%, #a733fd 100%) !important;
+  box-shadow: 0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(61, 71, 251, .45), inset 0 1px 0 rgba(255,255,255,.35) !important;
   white-space: nowrap;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  z-index: 70 !important;
+  text-decoration: none !important;
   transition: transform .3s ease, box-shadow .3s ease;
+}
+.btn-cta span {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+}
+.btn-cta svg {
+  stroke: #ffffff !important;
+  width: calc(9 * var(--u));
+  height: calc(9 * var(--u));
+  flex-shrink: 0;
 }
 
 .btn-cta svg { width: calc(9 * var(--u)); height: calc(9 * var(--u)); flex-shrink: 0; }
@@ -757,12 +783,23 @@ img, svg { display: block; }
 }
 
 
-/* Additional smooth styling for pricing and interaction */
+/* Interactive guarantees */
+.navbar a, .navbar button, .nav-brand, .btn-login, .btn-start, .nav-link {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+.card {
+  cursor: pointer;
+}
+
+/* Pricing Section (USD) */
 .pricing-section {
   padding: calc(60 * var(--u)) 0;
   text-align: center;
   position: relative;
   z-index: 10;
+  background: linear-gradient(180deg, #f4f9fe 0%, #ffffff 100%);
 }
 .pricing-grid {
   display: grid;
@@ -770,10 +807,10 @@ img, svg { display: block; }
   gap: calc(24 * var(--u));
   margin-top: calc(36 * var(--u));
   text-align: right;
+  padding: 0 calc(29 * var(--u));
 }
 .price-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.95);
   border: 1.5px solid rgba(43, 107, 255, 0.15);
   border-radius: calc(24 * var(--u));
   padding: calc(32 * var(--u));
@@ -789,7 +826,7 @@ img, svg { display: block; }
 }
 .price-card.featured {
   border: 2px solid #6a3dff;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 248, 254, 0.95) 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%);
   transform: scale(1.03);
 }
 .price-amount {
@@ -821,15 +858,22 @@ img, svg { display: block; }
   border-radius: calc(16 * var(--u));
   font-weight: 800;
   font-size: calc(13 * var(--u));
-  color: #fff;
+  color: #fff !important;
   background: var(--grad-btn);
   margin-top: calc(24 * var(--u));
   box-shadow: 0 6px 20px rgba(43, 107, 255, 0.25);
-  transition: opacity 0.2s ease;
+  cursor: pointer;
+  pointer-events: auto;
+  text-decoration: none !important;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
-.price-btn:hover { opacity: 0.92; }
+.price-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
 
-@media (max-width: 768px) {
-  .pricing-grid { grid-template-columns: 1fr; }
+@media (max-width: 899px) {
+  .site-header { height: auto; }
+  .pricing-grid { grid-template-columns: 1fr; padding: 0 16px; }
   .price-card.featured { transform: scale(1); }
 }

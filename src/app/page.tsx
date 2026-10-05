@@ -41,7 +41,7 @@ export default async function HomePage() {
         <header className="site-header" id="top">
           <div className="navbar" id="navbar">
             {/* Brand Logo & Title */}
-            <Link href="/" className="nav-brand" aria-label="رادار للتاجر">
+            <Link href="/" className="nav-brand" aria-label="رادار التاجر">
               <svg className="brand-mark" viewBox="0 0 24 30" aria-hidden="true">
                 <path d="M1.2 11.5 L7 9.2 V25.8 L1.2 27.6 Z" fill="url(#gLogoA)"/>
                 <path d="M1.2 11.5 L7 9.2 L9 10.2 L3.2 12.5 Z" fill="#cdb2ff"/>
@@ -59,11 +59,10 @@ export default async function HomePage() {
             </Link>
 
             {/* Navigation Menu */}
-            <nav className="nav-menu" aria-label="قائمة التنقل">
+            <nav className="nav-menu" aria-label="قائمة الموقع">
               <Link href="/" className="nav-link active">الرئيسية</Link>
               <a href="#features" className="nav-link">الخدمات</a>
               <a href="#pricing" className="nav-link">الأسعار</a>
-              <a href="#blog" className="nav-link">المدونة</a>
               <a href="#about" className="nav-link">من نحن</a>
               <a href="#contact" className="nav-link">تواصل معنا</a>
             </nav>
@@ -94,7 +93,7 @@ export default async function HomePage() {
         <main>
           {/* ==================== HERO ==================== */}
           <section className="hero" id="home">
-            {/* Visual: 3D Dashboard & 3D Bag */}
+            {/* Visual: 3D Dashboard */}
             <div className="hero-visual" id="hero-visual">
               <img
                 className="img-dashboard"
@@ -102,37 +101,32 @@ export default async function HomePage() {
                 src="/assets/dash_raw.png"
                 alt="لوحة تحكم رادار التاجر ثلاثية الأبعاد"
               />
-              <img
-                className="img-bag"
-                src="/assets/bag_perfect@2x.png"
-                alt="حقيبة 3D ومخطط نمو المبيعات"
-                aria-hidden="true"
-              />
             </div>
+
+            {/* 3D Shopping Bag positioned on the left side of the hero */}
+            <img
+              className="img-bag"
+              src="/assets/bag_perfect@2x.png"
+              alt="حقيبة 3D ومخطط نمو المبيعات"
+              aria-hidden="true"
+            />
 
             {/* Hero Content */}
             <div className="hero-content">
               <h1 className="hero-title">
-                <span>راقب متجرك.</span>
-                <span>تحكم في مخزونك.</span>
-                <span className="hl">ضاعف أرباحك.</span>
+                <span className="hl">راقب متجرك.</span>
+                <span className="hl">تحكم في مخزونك.</span>
+                <span className="hl hl-grad">ضاعف أرباحك.</span>
               </h1>
 
-              <p className="hero-sub">
+              <p className="hero-desc">
                 <span>منصة ذكية تجمع لك كل ما تحتاجه لإدارة متجرك الإلكتروني</span>
-                <span>بشكل احترافي وفعال، بدءاً من تتبع المبيعات والمخزون</span>
+                <span>بشكل احترافي وفعال، بدءاً من تتبع المبيعات والمخزون </span>
                 <span>وصولاً إلى تحليل الأداء وتحقيق النمو.</span>
               </p>
 
               <div className="hero-actions">
-                <Link href="/sign-up" className="btn-cta" id="btn-start-hero">
-                  <span>ابدأ الآن مجاناً</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </Link>
-
-                <a href="#video" className="btn-video" id="btn-video">
+                <a href="#pricing" className="btn-video" id="btn-video">
                   <span className="play">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M8 5.5v13l11-6.5z" fill="currentColor"/>
@@ -140,6 +134,13 @@ export default async function HomePage() {
                   </span>
                   <span>شاهد الفيديو التعريفي</span>
                 </a>
+
+                <Link href="/sign-up" className="btn-cta" id="btn-start-hero">
+                  <span>ابدأ الآن مجاناً</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </Link>
               </div>
 
               {/* Trust Pills */}
@@ -177,16 +178,16 @@ export default async function HomePage() {
           {/* ==================== FEATURES + STATS ==================== */}
           <section className="features" id="features">
             <div className="features-stage">
-              {/* Section Heading */}
               <span className="pill pill-top" id="pill-all"><i className="dot"></i>كل ما تحتاجه</span>
               <h2 className="sec-title">كل ما تحتاجه لمتجرك في مكان واحد</h2>
               <p className="sec-sub">
-                <span>أدوات متكاملة مصممة خصيصاً لتسهيل إدارة متجرك الإلكتروني، من المبيعات والمخزون إلى التحليلات والتقارير</span>
+                <span>أدوات متكاملة مصممة خصيصاً لتسهيل إدارة متجرك الإلكتروني، من المبيعات والمخزون إلى التحليلات والتقارير </span>
                 <span>مع واجهة سهلة الاستخدام تناسب جميع المستخدمين.</span>
               </p>
 
-              {/* 7 Feature Cards */}
+              {/* 7 Feature Cards Grid */}
               <div className="cards" role="list">
+                {/* 1. Alerts */}
                 <article className="card" role="listitem" id="card-alerts">
                   <div className="card-text">
                     <h3>تنبيهات تلقائية</h3>
@@ -195,10 +196,9 @@ export default async function HomePage() {
                   <div className="card-side">
                     <span className="tile">
                       <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <path d="M16 3.6c-1.5 0-2.4.9-2.4 2.1v.5c-3 .9-4.8 3.6-4.8 7.2 0 3.2-.7 5.3-2.6 7.2h19.6c-1.9-1.9-2.6-4-2.6-7.2 0-3.6-1.8-6.3-4.8-7.2v-.5c0-1.2-.9-2.1-2.4-2.1Z" fill="url(#gBell)"/>
-                        <path d="M11.2 12.4c.4-2 1.6-3.4 3.4-4" fill="none" stroke="#fff" strokeOpacity=".55" strokeWidth="1.4" strokeLinecap="round"/>
-                        <rect x="5.6" y="21" width="20.8" height="3.2" rx="1.6" fill="#2a86ff"/>
-                        <path d="M13 25.6a3 3 0 0 0 6 0Z" fill="#4a62ff"/>
+                        <path d="M16 4.4a6.6 6.6 0 0 0-6.6 6.6v3.7c0 1.1-.4 2.2-1.2 3l-1.3 1.3c-.7.7-.2 1.9.8 1.9h16.6c1 0 1.5-1.2.8-1.9l-1.3-1.3c-.8-.8-1.2-1.9-1.2-3V11A6.6 6.6 0 0 0 16 4.4Z" fill="url(#gBell)"/>
+                        <path d="M13.4 22.8a2.6 2.6 0 0 0 5.2 0" fill="none" stroke="#256bf5" strokeWidth="2" strokeLinecap="round"/>
+                        <circle cx="21" cy="7.5" r="3.2" fill="#ff4d6d"/>
                       </svg>
                     </span>
                     <span className="go" aria-hidden="true">
@@ -207,6 +207,7 @@ export default async function HomePage() {
                   </div>
                 </article>
 
+                {/* 2. Sales Analysis */}
                 <article className="card" role="listitem" id="card-sales">
                   <div className="card-text">
                     <h3>تحليل المبيعات</h3>
@@ -215,9 +216,11 @@ export default async function HomePage() {
                   <div className="card-side">
                     <span className="tile">
                       <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <rect x="6" y="18.5" width="5.2" height="8.5" rx="2.2" fill="url(#gBVv)"/>
-                        <rect x="13.4" y="12.5" width="5.2" height="14.5" rx="2.2" fill="url(#gBVv)"/>
-                        <rect x="20.8" y="5.5" width="5.2" height="21.5" rx="2.2" fill="url(#gBVv)"/>
+                        <rect x="5.4" y="16.5" width="5" height="10.5" rx="1.8" fill="url(#gBV)"/>
+                        <rect x="13.5" y="10.5" width="5" height="16.5" rx="1.8" fill="url(#gBV)"/>
+                        <rect x="21.6" y="5" width="5" height="22" rx="1.8" fill="url(#gBV)"/>
+                        <path d="M6 14.5l8-6 8 3" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round"/>
+                        <circle cx="22" cy="11.5" r="2" fill="#fff"/>
                       </svg>
                     </span>
                     <span className="go" aria-hidden="true">
@@ -226,6 +229,7 @@ export default async function HomePage() {
                   </div>
                 </article>
 
+                {/* 3. Profit Tracking */}
                 <article className="card" role="listitem" id="card-profit">
                   <div className="card-text">
                     <h3>تتبع الأرباح</h3>
@@ -251,10 +255,11 @@ export default async function HomePage() {
                   </div>
                 </article>
 
+                {/* 4. Inventory Management */}
                 <article className="card" role="listitem" id="card-inventory">
                   <div className="card-text">
                     <h3>إدارة المخزون الذكية</h3>
-                    <p>تتبع مخزونك بشكل لحظي وتجنب نفاد المنتجات الأكثر مبيعاً.</p>
+                    <p>تتبع مخزنك بشكل لحظي وتجنب نفاذ المنتجات الأكثر مبيعاً.</p>
                   </div>
                   <div className="card-side">
                     <span className="tile">
@@ -272,6 +277,7 @@ export default async function HomePage() {
                   </div>
                 </article>
 
+                {/* 5. High Security */}
                 <article className="card" role="listitem" id="card-security">
                   <div className="card-text">
                     <h3>أمان عالي</h3>
@@ -291,9 +297,10 @@ export default async function HomePage() {
                   </div>
                 </article>
 
+                {/* 6. Professional Reports */}
                 <article className="card" role="listitem" id="card-reports">
                   <div className="card-text">
-                    <h3>تقارير الاحترافية</h3>
+                    <h3>تقارير احترافية</h3>
                     <p>تقارير شاملة تساعدك على تطوير عملك ونموه.</p>
                   </div>
                   <div className="card-side">
@@ -310,6 +317,7 @@ export default async function HomePage() {
                   </div>
                 </article>
 
+                {/* 7. Product Management */}
                 <article className="card" role="listitem" id="card-products">
                   <div className="card-text">
                     <h3>إدارة المنتجات</h3>
@@ -378,7 +386,7 @@ export default async function HomePage() {
                 <Link href="/sign-up" className="price-btn">اشترك في البداية ($40)</Link>
               </div>
 
-              {/* Pro $99 */}
+              {/* Pro $150 */}
               <div className="price-card featured">
                 <div>
                   <div style={{ display: "inline-block", background: "linear-gradient(90deg, #6a3dff, #2b6bff)", color: "#fff", padding: "calc(3 * var(--u)) calc(12 * var(--u))", borderRadius: "calc(10 * var(--u))", fontSize: "calc(11 * var(--u))", fontWeight: "800", marginBottom: "calc(8 * var(--u))" }}>
@@ -386,7 +394,7 @@ export default async function HomePage() {
                   </div>
                   <h3 style={{ fontSize: "calc(20 * var(--u))", fontWeight: "800", color: "var(--navy)" }}>باقة المحترفين (Pro)</h3>
                   <p style={{ fontSize: "calc(12 * var(--u))", color: "var(--muted)", marginTop: "calc(4 * var(--u))" }}>للتجار النشطين وتوسيع المبيعات</p>
-                  <div className="price-amount">$99 <small style={{ fontSize: "calc(13 * var(--u))", fontWeight: "normal", color: "var(--muted)" }}>/ شهر</small></div>
+                  <div className="price-amount">$150 <small style={{ fontSize: "calc(13 * var(--u))", fontWeight: "normal", color: "var(--muted)" }}>/ شهر</small></div>
                   <ul className="price-features">
                     <li>✓ حتى 5 متاجر إلكترونية متعددة</li>
                     <li>✓ منتجات غير محدودة بالمخزن ∞</li>
@@ -396,7 +404,7 @@ export default async function HomePage() {
                     <li>✓ دعم فني ذو أولوية 24/7</li>
                   </ul>
                 </div>
-                <Link href="/sign-up" className="price-btn" style={{ background: "linear-gradient(90deg, #6a3dff 0%, #2b6bff 100%)" }}>اشترك في Pro ($99)</Link>
+                <Link href="/sign-up" className="price-btn" style={{ background: "linear-gradient(90deg, #6a3dff 0%, #2b6bff 100%)" }}>اشترك في Pro ($150)</Link>
               </div>
 
               {/* VIP Lifetime $250 */}
@@ -421,6 +429,28 @@ export default async function HomePage() {
               </div>
             </div>
           </section>
+
+          {/* ==================== ABOUT & CONTACT FOOTER ==================== */}
+          <footer className="site-footer" id="about">
+            <div id="contact" style={{ textAlign: "center", padding: "calc(40 * var(--u)) 0 calc(24 * var(--u))", borderTop: "1px solid rgba(214, 222, 247, 0.6)" }}>
+              <h3 style={{ fontSize: "calc(18 * var(--u))", fontWeight: "800", color: "var(--navy)", marginBottom: "calc(8 * var(--u))" }}>
+                رادار التاجر | شريكك الاستراتيجي في التجارة الإلكترونية
+              </h3>
+              <p style={{ fontSize: "calc(12 * var(--u))", color: "var(--muted)", maxWidth: "calc(600 * var(--u))", margin: "0 auto calc(16 * var(--u))", lineHeight: "1.7" }}>
+                نمكن رواد الأعمال وأصحاب المتاجر الإلكترونية من التحكم الكامل في مبيعاتهم ومخزونهم ومضاعفة أرباحهم الصافية عبر أحدث أدوات التحليل الذكية.
+              </p>
+              <div style={{ display: "flex", justifyContent: "center", gap: "calc(16 * var(--u))", fontSize: "calc(12 * var(--u))", color: "var(--ink)", marginBottom: "calc(20 * var(--u))" }}>
+                <a href="mailto:support@traders-radar.com" style={{ color: "var(--blue)", fontWeight: "700" }}>support@traders-radar.com</a>
+                <span>•</span>
+                <span>دعم فني مباشر 24/7</span>
+                <span>•</span>
+                <span>حماية مشفرة 100%</span>
+              </div>
+              <p style={{ fontSize: "calc(11 * var(--u))", color: "var(--muted)" }}>
+                © 2026 رادار التاجر (Trader's Radar). جميع الحقوق محفوظة.
+              </p>
+            </div>
+          </footer>
         </main>
       </div>
     </div>
