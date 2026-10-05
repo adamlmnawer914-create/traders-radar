@@ -1,0 +1,73 @@
+﻿import { SignUp } from '@clerk/nextjs';
+import Link from 'next/link';
+import { Zap, ArrowRight, Key } from 'lucide-react';
+
+export default function SignUpPage() {
+  const isKeyConfigured = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && 
+    !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.includes('XXXXXXXXX') &&
+    process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith('pk_');
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center items-center p-6 selection:bg-indigo-600 selection:text-white">
+      {/* Brand Header */}
+      <div className="text-center mb-8">
+        <Link href="/" className="inline-flex items-center gap-3 mb-3 hover:opacity-90 transition-opacity">
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/25">
+            <Zap className="w-7 h-7 text-white" />
+          </div>
+          <span className="text-2xl font-black bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">
+            رادار التاجر
+          </span>
+        </Link>
+        <h1 className="text-2xl font-bold text-white mt-1">إنشاء حساب تاجر جديد</h1>
+        <p className="text-slate-400 text-sm mt-1">ابدأ مجاناً وأطلق أول رادار لمبيعاتك ومخزونك</p>
+      </div>
+
+      {/* Main Container */}
+      <div className="w-full max-w-md">
+        {isKeyConfigured ? (
+          <div className="bg-slate-900/90 border border-slate-800 p-6 rounded-3xl shadow-2xl backdrop-blur-xl">
+            <SignUp 
+              appearance={{
+                elements: {
+                  rootBox: "w-full",
+                  card: "bg-transparent shadow-none border-none p-0",
+                  headerTitle: "text-white font-bold",
+                  headerSubtitle: "text-slate-400",
+                  socialButtonsBlockButton: "bg-slate-800 border-slate-700 text-white hover:bg-slate-700",
+                  formButtonPrimary: "bg-indigo-600 hover:bg-indigo-500 text-white font-bold",
+                  formFieldInput: "bg-slate-800 border-slate-700 text-white",
+                  footerActionLink: "text-indigo-400 hover:text-indigo-300",
+                }
+              }}
+            />
+          </div>
+        ) : (
+          <div className="bg-slate-900/90 border border-slate-800 p-8 rounded-3xl shadow-2xl backdrop-blur-xl text-center">
+            <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mx-auto mb-4">
+              <Key className="w-7 h-7" />
+            </div>
+            <h2 className="text-xl font-bold mb-2">تفعيل حساب التاجر السحابي</h2>
+            <p className="text-slate-400 text-sm leading-relaxed mb-6">
+              تم إعداد نموذج التسجيل ونظام المصادقة. يتم ربط حسابات التجار بقاعدة بيانات آمنة ومعزولة لكل متجر.
+            </p>
+
+            <Link
+              href="/dashboard"
+              className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-3.5 px-6 rounded-2xl transition-all shadow-lg shadow-indigo-600/30"
+            >
+              <span>دخول سريع للوحة التحكم (Demo Mode)</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        )}
+
+        <div className="text-center mt-6">
+          <Link href="/" className="text-xs text-slate-500 hover:text-slate-400 transition-colors">
+            ← العودة إلى الصفحة الرئيسية
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
