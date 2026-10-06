@@ -62,6 +62,7 @@ export default async function HomePage() {
             <nav className="nav-menu" aria-label="قائمة الموقع">
               <Link href="/" className="nav-link active">الرئيسية</Link>
               <a href="#features" className="nav-link">الخدمات</a>
+              <a href="#stats-showcase" className="nav-link">التحليلات</a>
               <a href="#pricing" className="nav-link">الأسعار</a>
               <a href="#about" className="nav-link">من نحن</a>
               <a href="#contact" className="nav-link">تواصل معنا</a>
@@ -126,7 +127,7 @@ export default async function HomePage() {
               </p>
 
               <div className="hero-actions">
-                <a href="#pricing" className="btn-video" id="btn-video">
+                <a href="#stats-showcase" className="btn-video" id="btn-video">
                   <span className="play">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
                       <path d="M8 5.5v13l11-6.5z" fill="currentColor"/>
@@ -175,18 +176,19 @@ export default async function HomePage() {
             </div>
           </section>
 
-          {/* ==================== FEATURES + STATS ==================== */}
+          {/* ==================== FEATURES SECTION ("كل ما تحتاجه لمتجرك") ==================== */}
           <section className="features" id="features">
-            <div className="features-stage">
-              <span className="pill pill-top" id="pill-all"><i className="dot"></i>كل ما تحتاجه</span>
-              <h2 className="sec-title">كل ما تحتاجه لمتجرك في مكان واحد</h2>
-              <p className="sec-sub">
-                <span>أدوات متكاملة مصممة خصيصاً لتسهيل إدارة متجرك الإلكتروني، من المبيعات والمخزون إلى التحليلات والتقارير </span>
-                <span>مع واجهة سهلة الاستخدام تناسب جميع المستخدمين.</span>
+            <div className="features-header">
+              <span className="pill pill-features-top" id="pill-all"><i className="dot"></i>كل ما تحتاجه</span>
+              <h2 className="features-title">كل ما تحتاجه لمتجرك في مكان واحد</h2>
+              <p className="features-sub">
+                أدوات متكاملة مصممة خصيصاً لتسهيل إدارة متجرك الإلكتروني، من المبيعات والمخزون إلى التحليلات والتقارير مع واجهة سهلة الاستخدام تناسب جميع المستخدمين.
               </p>
+            </div>
 
-              {/* 7 Feature Cards Grid */}
-              <div className="cards" role="list">
+            {/* 7 Feature Cards Grid - Beautifully Centered */}
+            <div className="cards-wrapper">
+              <div className="cards-grid" role="list">
                 {/* 1. Alerts */}
                 <article className="card" role="listitem" id="card-alerts">
                   <div className="card-text">
@@ -339,24 +341,49 @@ export default async function HomePage() {
                   </div>
                 </article>
               </div>
+            </div>
+          </section>
 
-              {/* Ultra-Luxurious 3D Stats Graphic */}
-              <img
-                className="img-stats"
-                src="/assets/stats_perfect@2x.png"
-                alt="لوحة تحليلات وإحصائيات ثلاثية الأبعاد"
-              />
-              <span className="pill pill-stats" id="pill-tools"><i className="dot"></i>أدوات نجاحك</span>
-              <h2 className="stats-title">اعرف أين يذهب كل درهم</h2>
-              <p className="stats-text">
-                <span>تقارير مفصلة ورؤية واضحة لأداء متجرك، تساعدك على</span>
-                <span>اتخاذ قرارات أفضل وزيادة أرباحك بكل ثقة.</span>
-              </p>
-              <ul className="checks">
-                <li><i className="chk"><svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg></i>مراقبة المبيعات والمخزون</li>
-                <li><i className="chk"><svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg></i>تحليل سلوك العملاء</li>
-                <li><i className="chk"><svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg></i>توقعات النمو المستقبلية</li>
-              </ul>
+          {/* ==================== STATS SHOWCASE SECTION ("اعرف أين يذهب كل درهم" - فوق الباقات) ==================== */}
+          <section className="stats-showcase-section" id="stats-showcase">
+            <div className="stats-showcase-container">
+              {/* Text & Checklist Column (Right in RTL) */}
+              <div className="stats-showcase-text-col">
+                <span className="pill pill-stats-showcase" id="pill-tools"><i className="dot"></i>أدوات نجاحك</span>
+                <h2 className="stats-showcase-title">اعرف أين يذهب كل درهم</h2>
+                <p className="stats-showcase-desc">
+                  تقارير مفصلة ورؤية واضحة لأداء متجرك، تساعدك على اتخاذ قرارات أفضل وزيادة أرباحك بكل ثقة.
+                </p>
+                <ul className="stats-showcase-checks">
+                  <li>
+                    <i className="chk">
+                      <svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </i>
+                    <span>مراقبة المبيعات والمخزون</span>
+                  </li>
+                  <li>
+                    <i className="chk">
+                      <svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </i>
+                    <span>تحليل سلوك العملاء</span>
+                  </li>
+                  <li>
+                    <i className="chk">
+                      <svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </i>
+                    <span>توقعات النمو المستقبلية</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Ultra-Luxurious 3D Stats Graphic (Left in RTL) */}
+              <div className="stats-showcase-visual">
+                <img
+                  className="img-stats-showcase"
+                  src="/assets/stats_perfect@2x.png"
+                  alt="لوحة تحليلات وإحصائيات ثلاثية الأبعاد"
+                />
+              </div>
             </div>
           </section>
 
