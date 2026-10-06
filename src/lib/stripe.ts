@@ -1,4 +1,4 @@
-import Stripe from "stripe";
+﻿import Stripe from "stripe";
 import prisma from "@/lib/prisma";
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
@@ -42,9 +42,9 @@ export const PLANS: Record<"STARTER" | "PRO" | "VIP", PlanConfig> = {
     currency: "USD",
     features: [
       "متجر إلكتروني واحد متصل (1 Store)",
-      "حتى 250 منتج نشط في المخزون",
+      "حتى 250 منتج نشط في المخزن",
       "حتى 1,000 طلب ومبيعة شهرياً",
-      "حساب تلقائي لهامش وصافي الأرباح بدقة",
+      "حساب تلقائي للهامش وصافي الأرباح بدقة",
       "تنبيهات انخفاض المخزون اللحظية",
       "تقارير المبيعات والأداء الأساسية",
       "دعم فني عبر البريد الإلكتروني",
@@ -55,17 +55,17 @@ export const PLANS: Record<"STARTER" | "PRO" | "VIP", PlanConfig> = {
     id: "PRO",
     name: "باقة المحترفين (Pro)",
     nameEn: "Pro",
-    badge: "الأكثر اختياراً ⭐",
+    badge: "الأكثر طلباً ⭐",
     description: "للتجار النشطين الباحثين عن النمو السريع وأتمتة الأرباح",
-    price: 99,
+    price: 150,
     currency: "USD",
     features: [
       "حتى 5 متاجر إلكترونية متعددة العملات",
-      "منتجات غير محدودة ∞ في المخزون",
-      "طلبات ومبيعات غير محدودة ∞ شهرياً",
+      "منتجات غير محدودة في المخزن ∞",
+      "طلبات ومبيعات غير محدودة شهرياً ∞",
       "لوحة تحليل أرباح ذكية وتنبؤات AI بالمبيعات",
-      "تنبيهات استباقية ذكية عند انخفاض المخزون",
-      "تصدير التقارير المالية إلى Excel و PDF بضغطة زر",
+      "تنبيهات استباقية ذكية عند نفاد المخزون",
+      "تصدير التقارير المالية إلى Excel و PDF بنقرة واحدة",
       "دعم فني متميز ذو أولوية 24/7",
     ],
     limits: { stores: 5, products: -1, orders: -1 },
@@ -74,7 +74,7 @@ export const PLANS: Record<"STARTER" | "PRO" | "VIP", PlanConfig> = {
     id: "VIP",
     name: "باقة VIP مدى الحياة (VIP Lifetime)",
     nameEn: "VIP Lifetime",
-    badge: "عرض إطلاق حصري 👑",
+    badge: "دفعة واحدة للأبد 👑",
     description: "وصول غير محدود لمدى الحياة بدون أي اشتراكات أو فواتير شهرية نهائياً",
     price: 250,
     isLifetime: true,
@@ -86,7 +86,7 @@ export const PLANS: Record<"STARTER" | "PRO" | "VIP", PlanConfig> = {
       "ربط API مخصص ومباشر مع متاجرك",
       "مدير حساب شخصي مخصص على مدار الساعة",
       "كافة التحديثات والميزات المستقبلية مجاناً للأبد",
-      "اتفاقية مستوى الخدمة المضمونة SLA 99.9%",
+      "أفضلية مستوى الخدمة المضمونة SLA 99.9%",
     ],
     limits: { stores: -1, products: -1, orders: -1 },
   },
@@ -108,7 +108,7 @@ export async function getUserSubscription(userId: string) {
       data: {
         userId,
         plan: "STARTER",
-        status: "INACTIVE", // Requires payment, no free tier!
+        status: "ACTIVE", // Enabled for active access
       },
     });
   }

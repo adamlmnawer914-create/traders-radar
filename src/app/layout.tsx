@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Cairo } from 'next/font/google';
 import { ClerkProvider } from '@clerk/nextjs';
 import { arSA } from '@clerk/localizations';
@@ -23,7 +23,13 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body className={`${cairo.className} min-h-screen antialiased`}>
-        <ClerkProvider localization={arSA}>
+        <ClerkProvider
+          publishableKey={
+            process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
+            "pk_test_aHVtb3JvdXMtc2t1bmstNTgyNi5jbGVyay5hY2NvdW50cy5kZXYk"
+          }
+          localization={arSA}
+        >
           {children}
         </ClerkProvider>
       </body>

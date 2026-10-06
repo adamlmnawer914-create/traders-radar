@@ -1061,3 +1061,16 @@ img, svg { display: block; }
     scroll-margin-top: 80px;
   }
 }
+
+/* Image Ultra-HD Sharpness & Contrast Optimization */
+.img-dashboard,
+.img-stats-showcase,
+.img-bag,
+.img-stats,
+#dashboard-3d {
+  image-rendering: -webkit-optimize-contrast !important;
+  image-rendering: crisp-edges !important;
+  transform: translateZ(0) !important;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+}

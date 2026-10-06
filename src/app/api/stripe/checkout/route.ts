@@ -1,4 +1,5 @@
-import { auth, currentUser } from "@clerk/nextjs/server";
+﻿import { auth, currentUser } from "@clerk/nextjs/server";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { stripe, isStripeConfigured, PLANS, PlanType } from "@/lib/stripe";
@@ -6,43 +7,49 @@ import { stripe, isStripeConfigured, PLANS, PlanType } from "@/lib/stripe";
 export async function POST(req: Request) {
   try {
     const { userId: clerkId } = await auth();
-    if (!clerkId) {
-      return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
-    }
+    const cookieStore = await cookies();
+    const isDemoCookie = cookieStore.get("traders_demo_session")?.value === "true";
 
-    const clerkUser = await currentUser();
-    const body = await req.json();
+    const body = await req.json().catch(() => ({}));
     const planId = (body.planId as PlanType) || "STARTER";
+    const guestEmail = body.email || (isDemoCookie ? "demo.trader@traders-radar.com" : null);
 
     if (!PLANS[planId]) {
-      return NextResponse.json({ error: "باقة غير صالحة" }, { status: 400 });
+      return NextResponse.json({ error: "الباقة المختارة غير صالحة" }, { status: 400 });
     }
 
     const planConfig = PLANS[planId];
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://traders-radar.vercel.app";
 
-    // Find or create DB user
+    // Effective user identifier: real clerkId or demo ID
+    const effectiveClerkId = clerkId || (isDemoCookie ? "demo_trader_vip" : `guest_${Date.now()}`);
+
     let user = await prisma.user.findUnique({
-      where: { clerkId },
+      where: { clerkId: effectiveClerkId },
       include: { subscription: true },
     });
 
     if (!user) {
-      const email = clerkUser?.emailAddresses?.[0]?.emailAddress || `${clerkId}@unknown.com`;
-      const name = `${clerkUser?.firstName ?? ""} ${clerkUser?.lastName ?? ""}`.trim() || null;
+      let email = guestEmail || `${effectiveClerkId}@tradersradar.com`;
+      let name = "التاجر المشترك";
+
+      if (clerkId) {
+        const clerkUser = await currentUser();
+        email = clerkUser?.emailAddresses?.[0]?.emailAddress || email;
+        name = `${clerkUser?.firstName ?? ""} ${clerkUser?.lastName ?? ""}`.trim() || name;
+      }
+
       user = await prisma.user.create({
         data: {
-          clerkId,
+          clerkId: effectiveClerkId,
           email,
           name,
-          imageUrl: clerkUser?.imageUrl,
         },
         include: { subscription: true },
       });
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://traders-radar.vercel.app";
-
-    // If Stripe is configured with live/test key
+    // 1. If real Stripe is configured and live/test key is provided
     if (isStripeConfigured && stripe) {
       let stripeCustomerId = user.subscription?.stripeCustomerId;
 
@@ -50,7 +57,7 @@ export async function POST(req: Request) {
         const customer = await stripe.customers.create({
           email: user.email,
           name: user.name || undefined,
-          metadata: { userId: user.id, clerkId },
+          metadata: { userId: user.id, clerkId: effectiveClerkId },
         });
         stripeCustomerId = customer.id;
 
@@ -108,10 +115,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ url: session.url });
     }
 
-    // Instant Activation in Demo Mode (when Stripe secret is test placeholder)
+    // 2. Instant Subscription Activation (when Stripe is in demo/test mode)
     const nextPeriod = new Date();
     if (planConfig.isLifetime) {
-      nextPeriod.setFullYear(nextPeriod.getFullYear() + 100); // 100 years lifetime
+      nextPeriod.setFullYear(nextPeriod.getFullYear() + 100);
     } else {
       nextPeriod.setMonth(nextPeriod.getMonth() + 1);
     }
@@ -131,13 +138,27 @@ export async function POST(req: Request) {
       },
     });
 
-    return NextResponse.json({
-      url: `${appUrl}/dashboard/billing?status=success&plan=${planId}&mode=demo`,
+    // Set demo cookie so the user can immediately access the dashboard
+    const response = NextResponse.json({
+      url: `/dashboard/billing?status=success&plan=${planId}`,
+      success: true,
       demo: true,
+      plan: planConfig,
       message: `تم تفعيل ${planConfig.name} بنجاح!`,
     });
+
+    response.cookies.set("traders_demo_session", "true", {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 30,
+      sameSite: "lax",
+    });
+
+    return response;
   } catch (error: any) {
     console.error("Checkout error:", error);
-    return NextResponse.json({ error: error?.message || "حدث خطأ أثناء إنشاء جلسة الدفع" }, { status: 500 });
+    return NextResponse.json(
+      { error: error?.message || "حدث خطأ أثناء الاتصال ببوابة الدفع" },
+      { status: 500 }
+    );
   }
 }

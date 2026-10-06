@@ -1,6 +1,7 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import PricingSection from "./components/PricingSection";
 
 export default async function HomePage() {
   try {
@@ -78,7 +79,7 @@ export default async function HomePage() {
                 <span>تسجيل الدخول</span>
               </Link>
 
-              <Link href="/sign-up" className="btn-start" id="btn-start-nav">ابدأ الآن</Link>
+              <a href="#pricing" className="btn-start" id="btn-start-nav">ابدأ الآن</a>
 
               <label className="search-bar" htmlFor="site-search">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -100,7 +101,9 @@ export default async function HomePage() {
                 className="img-dashboard"
                 id="dashboard-3d"
                 src="/assets/dash_perfect@2x.png"
-                alt="لوحة تحكم رادار التاجر ثلاثية الأبعاد الفاخرة"
+                alt="لوحة تحكم رادار التجار ثلاثية الأبعاد الفاخرة"
+                loading="eager"
+                decoding="async"
               />
             </div>
 
@@ -108,7 +111,7 @@ export default async function HomePage() {
             <img
               className="img-bag"
               src="/assets/bag_perfect@2x.png"
-              alt="حقيبة 3D ومخطط نمو المبيعات"
+              alt="حقيبة 3D ومؤشر نمو المبيعات"
               aria-hidden="true"
             />
 
@@ -120,257 +123,231 @@ export default async function HomePage() {
                 <span className="hl hl-grad">ضاعف أرباحك.</span>
               </h1>
 
-              <p className="hero-desc">
-                <span>منصة ذكية تجمع لك كل ما تحتاجه لإدارة متجرك الإلكتروني</span>
-                <span>بشكل احترافي وفعال، بدءاً من تتبع المبيعات والمخزون </span>
-                <span>وصولاً إلى تحليل الأداء وتحقيق النمو.</span>
+              <p className="hero-sub">
+                منصة ذكية تجمع لك كل ما تحتاجه لإدارة متجرك الإلكتروني بشكل احترافي وفعال، بدءاً من تتبع المبيعات والمخزون وصولاً إلى تحليل الأداء وتحقيق النمو.
               </p>
 
+              {/* CTAs */}
               <div className="hero-actions">
-                <a href="#stats-showcase" className="btn-video" id="btn-video">
-                  <span className="play">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M8 5.5v13l11-6.5z" fill="currentColor"/>
-                    </svg>
-                  </span>
-                  <span>شاهد الفيديو التعريفي</span>
+                <a href="#pricing" className="btn-cta" id="hero-cta-btn">
+                  <span>ابدأ الآن</span>
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
                 </a>
 
-                <Link href="/sign-up" className="btn-cta" id="btn-start-hero">
-                  <span>ابدأ الآن مجاناً</span>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </Link>
+                <a href="#stats-showcase" className="btn-video" id="hero-video-btn">
+                  <span className="play-triangle">▶</span>
+                  <span>شاهد التحليلات الحية</span>
+                </a>
               </div>
 
-              {/* Trust Pills */}
-              <ul className="trust-row">
-                <li className="trust">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M19.4 15a4 4 0 0 0-3.4-6H15a6 6 0 0 0-11.5 2 4.5 4.5 0 0 0 1 8.8h15a3.5 3.5 0 0 0-.1-4.8Z" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round"/>
-                    <path d="m9.5 13 2.5-2.5L14.5 13M12 10.5v6" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round"/>
-                  </svg>
-                  <span><strong>تحديثات مستمرة</strong><small>لأداء أفضل</small></span>
-                </li>
+              {/* Feature Pills */}
+              <div className="features-row">
+                <div className="feat-pill">
+                  <div className="feat-pill-ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm-3 5a3 3 0 0 1 6 0v3H9V7z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <div className="feat-pill-text">
+                    <strong>تحديثات مستمرة</strong>
+                    <small>لأداء أفضل</small>
+                  </div>
+                </div>
 
-                <li className="trust">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2.8 19.6 5.6v5.6c0 4.7-3.1 8.4-7.6 10-4.5-1.6-7.6-5.3-7.6-10V5.6Z" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinejoin="round"/>
-                    <path d="m8.8 12 2.4 2.4 4.2-4.6" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  <span><strong>أمان متقدم</strong><small>لحماية بياناتك</small></span>
-                </li>
+                <div className="feat-pill">
+                  <div className="feat-pill-ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2 4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <div className="feat-pill-text">
+                    <strong>أمان متقدم</strong>
+                    <small>لحماية بياناتك</small>
+                  </div>
+                </div>
 
-                <li className="trust">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M4.5 14v-2.2a7.5 7.5 0 0 1 15 0V14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                    <rect x="3.2" y="12.6" width="3.6" height="6" rx="1.6" fill="currentColor"/>
-                    <rect x="17.2" y="12.6" width="3.6" height="6" rx="1.6" fill="currentColor"/>
-                    <path d="M18.6 18.6c0 1.8-1.6 2.6-4 2.6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-                    <circle cx="12.6" cy="21.2" r="1.1" fill="currentColor"/>
-                  </svg>
-                  <span><strong>دعم فني 24/7</strong><small>معك دائماً</small></span>
-                </li>
-              </ul>
+                <div className="feat-pill">
+                  <div className="feat-pill-ico">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                  <div className="feat-pill-text">
+                    <strong>دعم فني 24/7</strong>
+                    <small>معك دائماً</small>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
-          {/* ==================== FEATURES SECTION ("كل ما تحتاجه لمتجرك") ==================== */}
+          {/* ==================== FEATURES GRID ==================== */}
           <section className="features" id="features">
-            <div className="features-header">
-              <span className="pill pill-features-top" id="pill-all"><i className="dot"></i>كل ما تحتاجه</span>
-              <h2 className="features-title">كل ما تحتاجه لمتجرك في مكان واحد</h2>
-              <p className="features-sub">
-                أدوات متكاملة مصممة خصيصاً لتسهيل إدارة متجرك الإلكتروني، من المبيعات والمخزون إلى التحليلات والتقارير مع واجهة سهلة الاستخدام تناسب جميع المستخدمين.
-              </p>
-            </div>
+            <span className="pill pill-top"><i className="dot"></i>كل ما تحتاجه</span>
+            <h2 className="features-title">كل ما تحتاجه لمتجرك في مكان واحد</h2>
+            <p className="features-sub">
+              <span>أدوات متكاملة مصممة خصيصاً لتسهيل إدارة متجرك الإلكتروني، من المبيعات والمخزون إلى التحليلات والتقارير</span>
+              <br />
+              <span>مع واجهة سهلة الاستخدام تناسب جميع المستخدمين.</span>
+            </p>
 
-            {/* 7 Feature Cards Grid - Beautifully Centered */}
             <div className="cards-wrapper">
-              <div className="cards-grid" role="list">
-                {/* 1. Alerts */}
-                <article className="card" role="listitem" id="card-alerts">
-                  <div className="card-text">
-                    <h3>تنبيهات تلقائية</h3>
-                    <p>كن دائماً على اطلاع بأهم الأحداث والتحديثات في متجرك.</p>
+              <div className="cards-grid">
+                {/* 1. إدارة المخزون الذكية */}
+                <div className="fcard">
+                  <div className="fcard-icon">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <polygon points="22,6 38,15 22,24 6,15" fill="url(#gTop)"/>
+                      <polygon points="6,15 22,24 22,38 6,29" fill="url(#gLeft)"/>
+                      <polygon points="22,24 38,15 38,29 22,38" fill="url(#gRight)"/>
+                    </svg>
                   </div>
-                  <div className="card-side">
-                    <span className="tile">
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <path d="M16 4.4a6.6 6.6 0 0 0-6.6 6.6v3.7c0 1.1-.4 2.2-1.2 3l-1.3 1.3c-.7.7-.2 1.9.8 1.9h16.6c1 0 1.5-1.2.8-1.9l-1.3-1.3c-.8-.8-1.2-1.9-1.2-3V11A6.6 6.6 0 0 0 16 4.4Z" fill="url(#gBell)"/>
-                        <path d="M13.4 22.8a2.6 2.6 0 0 0 5.2 0" fill="none" stroke="#256bf5" strokeWidth="2" strokeLinecap="round"/>
-                        <circle cx="21" cy="7.5" r="3.2" fill="#ff4d6d"/>
-                      </svg>
-                    </span>
-                    <span className="go" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                </article>
+                  <h3 className="fcard-title">إدارة المخزون الذكية</h3>
+                  <p className="fcard-desc">تتبع مخزونك بشكل لحظي وتجنب نفاد المنتجات الأكثر مبيعاً.</p>
+                  <a href="#stats-showcase" className="fcard-arrow" aria-label="إدارة المخزون الذكية">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M12 4l-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
 
-                {/* 2. Sales Analysis */}
-                <article className="card" role="listitem" id="card-sales">
-                  <div className="card-text">
-                    <h3>تحليل المبيعات</h3>
-                    <p>اكتشف أفضل المنتجات أداءً وابنِ قراراتك على بيانات حقيقية.</p>
+                {/* 2. تتبع الأرباح */}
+                <div className="fcard">
+                  <div className="fcard-icon">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <ellipse cx="22" cy="14" rx="14" ry="5.5" fill="url(#gGold)"/>
+                      <path d="M8 14 v8 c0 3 6.3 5.5 14 5.5 s14-2.5 14-5.5 v-8 Z" fill="url(#gGoldS)"/>
+                      <path d="M8 22 v8 c0 3 6.3 5.5 14 5.5 s14-2.5 14-5.5 v-8 Z" fill="url(#gGold)"/>
+                    </svg>
                   </div>
-                  <div className="card-side">
-                    <span className="tile">
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <rect x="5.4" y="16.5" width="5" height="10.5" rx="1.8" fill="url(#gBV)"/>
-                        <rect x="13.5" y="10.5" width="5" height="16.5" rx="1.8" fill="url(#gBV)"/>
-                        <rect x="21.6" y="5" width="5" height="22" rx="1.8" fill="url(#gBV)"/>
-                        <path d="M6 14.5l8-6 8 3" fill="none" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round"/>
-                        <circle cx="22" cy="11.5" r="2" fill="#fff"/>
-                      </svg>
-                    </span>
-                    <span className="go" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                </article>
+                  <h3 className="fcard-title">تتبع الأرباح بدقة</h3>
+                  <p className="fcard-desc">اعرف أرباحك بدقة من خلال تقارير مفصلة وواضحة.</p>
+                  <a href="#stats-showcase" className="fcard-arrow" aria-label="تتبع الأرباح بدقة">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M12 4l-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
 
-                {/* 3. Profit Tracking */}
-                <article className="card" role="listitem" id="card-profit">
-                  <div className="card-text">
-                    <h3>تتبع الأرباح</h3>
-                    <p>اعرف أرباحك بدقة من خلال تقارير مفصلة وواضحة.</p>
+                {/* 3. تحليل المبيعات */}
+                <div className="fcard">
+                  <div className="fcard-icon">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <rect x="7" y="24" width="7" height="14" rx="2" fill="url(#gBlueL)"/>
+                      <rect x="18.5" y="15" width="7" height="23" rx="2" fill="url(#gBlueR)"/>
+                      <rect x="30" y="8" width="7" height="30" rx="2" fill="url(#gBlueT)"/>
+                    </svg>
                   </div>
-                  <div className="card-side">
-                    <span className="tile">
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <path d="M6.5 22.5v3.2c0 1.7 4.2 3 9.5 3s9.5-1.3 9.5-3v-3.2Z" fill="url(#gGoldS)"/>
-                        <ellipse cx="16" cy="22.5" rx="9.5" ry="3" fill="url(#gGold)"/>
-                        <path d="M6.5 17.6v3.4c0 1.7 4.2 3 9.5 3s9.5-1.3 9.5-3v-3.4Z" fill="url(#gGoldS)"/>
-                        <ellipse cx="16" cy="17.6" rx="9.5" ry="3" fill="url(#gGold)"/>
-                        <path d="M6.5 12.8v3.4c0 1.7 4.2 3 9.5 3s9.5-1.3 9.5-3v-3.4Z" fill="url(#gGoldS)"/>
-                        <ellipse cx="16" cy="12.8" rx="9.5" ry="3" fill="url(#gGold)"/>
-                        <path d="M6.5 8v3.4c0 1.7 4.2 3 9.5 3s9.5-1.3 9.5-3V8Z" fill="url(#gGoldS)"/>
-                        <ellipse cx="16" cy="8" rx="9.5" ry="3" fill="#ffd54a"/>
-                        <ellipse cx="16" cy="7.8" rx="4.6" ry="1.4" fill="#ffe98a"/>
-                      </svg>
-                    </span>
-                    <span className="go" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                </article>
+                  <h3 className="fcard-title">تحليل المبيعات</h3>
+                  <p className="fcard-desc">اكتشف أفضل المنتجات أداءً وابنِ قراراتك على بيانات حقيقية.</p>
+                  <a href="#stats-showcase" className="fcard-arrow" aria-label="تحليل المبيعات">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M12 4l-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
 
-                {/* 4. Inventory Management */}
-                <article className="card" role="listitem" id="card-inventory">
-                  <div className="card-text">
-                    <h3>إدارة المخزون الذكية</h3>
-                    <p>تتبع مخزنك بشكل لحظي وتجنب نفاذ المنتجات الأكثر مبيعاً.</p>
+                {/* 4. تنبيهات تلقائية */}
+                <div className="fcard">
+                  <div className="fcard-icon">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <path d="M22 6 a10 10 0 0 0-10 10 v7 l-3 4 v2 h26 v-2 l-3-4 v-7 a10 10 0 0 0-10-10 Z" fill="url(#gBell)"/>
+                      <circle cx="22" cy="34" r="3" fill="#ffe066"/>
+                    </svg>
                   </div>
-                  <div className="card-side">
-                    <span className="tile">
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <path d="M4.6 10.4 14.8 15.6V29L4.6 23.4Z" fill="url(#gLeft)"/>
-                        <path d="M14.8 15.6 25.4 10.4V23.4L14.8 29Z" fill="url(#gRight)"/>
-                        <path d="M4.6 10.4 14.8 5.2 25.4 10.4 14.8 15.6Z" fill="url(#gTop)"/>
-                        <path d="M14.8 15.6V29M4.6 10.4l10.2 5.2 10.6-5.2" fill="none" stroke="#fff" strokeOpacity=".7" strokeWidth="1.1" strokeLinejoin="round"/>
-                        <circle cx="27.6" cy="5.4" r="1.7" fill="#a561ff"/>
-                      </svg>
-                    </span>
-                    <span className="go" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                </article>
+                  <h3 className="fcard-title">تنبيهات تلقائية</h3>
+                  <p className="fcard-desc">ابقَ على اطلاع بأهم التغييرات والتحديثات في متجرك.</p>
+                  <a href="#stats-showcase" className="fcard-arrow" aria-label="تنبيهات تلقائية">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M12 4l-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
 
-                {/* 5. High Security */}
-                <article className="card" role="listitem" id="card-security">
-                  <div className="card-text">
-                    <h3>أمان عالي</h3>
-                    <p>حماية متقدمة لبياناتك ومعاملاتك المالية.</p>
+                {/* 5. إدارة المنتجات */}
+                <div className="fcard">
+                  <div className="fcard-icon">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <polygon points="22,6 38,15 22,24 6,15" fill="url(#gBV)"/>
+                      <polygon points="6,15 22,24 22,38 6,29" fill="url(#gBVv)"/>
+                      <polygon points="22,24 38,15 38,29 22,38" fill="url(#gBVh)"/>
+                    </svg>
                   </div>
-                  <div className="card-side">
-                    <span className="tile">
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <path d="M16 3.4 26.4 7v8.2c0 6.3-4.3 10.6-10.4 13.2C9.9 25.8 5.6 21.5 5.6 15.2V7Z" fill="url(#gShield)"/>
-                        <path d="M16 6.6 23.4 9.2v5.8c0 4.7-3 7.9-7.4 9.9-4.4-2-7.4-5.2-7.4-9.9V9.2Z" fill="#fff"/>
-                        <path d="m11.8 15.6 3 3 5.6-6.2" fill="none" stroke="#3f45e8" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </span>
-                    <span className="go" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                </article>
+                  <h3 className="fcard-title">إدارة المنتجات</h3>
+                  <p className="fcard-desc">أضف وعدّل منتجاتك بسهولة وتحكم كامل في مواصفاتها.</p>
+                  <a href="#stats-showcase" className="fcard-arrow" aria-label="إدارة المنتجات">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M12 4l-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
 
-                {/* 6. Professional Reports */}
-                <article className="card" role="listitem" id="card-reports">
-                  <div className="card-text">
-                    <h3>تقارير احترافية</h3>
-                    <p>تقارير شاملة تساعدك على تطوير عملك ونموه.</p>
+                {/* 6. تقارير احترافية */}
+                <div className="fcard">
+                  <div className="fcard-icon">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <rect x="10" y="7" width="24" height="30" rx="3" fill="url(#gDoc)"/>
+                      <line x1="15" y1="14" x2="29" y2="14" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                      <line x1="15" y1="20" x2="29" y2="20" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                      <line x1="15" y1="26" x2="23" y2="26" stroke="#fff" strokeWidth="2.2" strokeLinecap="round"/>
+                    </svg>
                   </div>
-                  <div className="card-side">
-                    <span className="tile">
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <rect x="7.2" y="4.6" width="17.6" height="22.8" rx="3.4" fill="url(#gDoc)"/>
-                        <circle cx="10.4" cy="7.8" r="1" fill="#b7d4ff"/>
-                        <path d="M11.4 12.6h9.6M11.4 16.6h9.6M11.4 20.6h9.6" stroke="#fff" strokeWidth="1.9" strokeLinecap="round"/>
-                      </svg>
-                    </span>
-                    <span className="go" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                </article>
+                  <h3 className="fcard-title">تقارير احترافية</h3>
+                  <p className="fcard-desc">تقارير شاملة تساعدك على تطوير عملك وتنمو.</p>
+                  <a href="#stats-showcase" className="fcard-arrow" aria-label="تقارير احترافية">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M12 4l-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
 
-                {/* 7. Product Management */}
-                <article className="card" role="listitem" id="card-products">
-                  <div className="card-text">
-                    <h3>إدارة المنتجات</h3>
-                    <p>أضف وعدل منتجاتك بسهولة وتحكم كامل في مواصفاتها.</p>
+                {/* 7. أمان عالي */}
+                <div className="fcard">
+                  <div className="fcard-icon">
+                    <svg viewBox="0 0 44 44" aria-hidden="true">
+                      <path d="M22 6 L34 11 V22 C34 29 29 35 22 38 C15 35 10 29 10 22 V11 Z" fill="url(#gShield)"/>
+                      <polyline points="17,21 21,25 27,17" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
                   </div>
-                  <div className="card-side">
-                    <span className="tile">
-                      <svg viewBox="0 0 32 32" aria-hidden="true">
-                        <path d="M4.6 10.4 14.8 15.6V29L4.6 23.4Z" fill="url(#gBlueL)"/>
-                        <path d="M14.8 15.6 25.4 10.4V23.4L14.8 29Z" fill="url(#gBlueR)"/>
-                        <path d="M4.6 10.4 14.8 5.2 25.4 10.4 14.8 15.6Z" fill="url(#gBlueT)"/>
-                        <path d="M14.8 15.6V29M4.6 10.4l10.2 5.2 10.6-5.2" fill="none" stroke="#fff" strokeOpacity=".75" strokeWidth="1.2" strokeLinejoin="round"/>
-                        <path d="M9.6 18.6v4.2M19.8 18.6v4.2" stroke="#fff" strokeOpacity=".55" strokeWidth="1" strokeLinecap="round"/>
-                      </svg>
-                    </span>
-                    <span className="go" aria-hidden="true">
-                      <svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </span>
-                  </div>
-                </article>
+                  <h3 className="fcard-title">أمان عالي</h3>
+                  <p className="fcard-desc">حماية متقدمة لبياناتك ومعاملاتك المالية.</p>
+                  <a href="#stats-showcase" className="fcard-arrow" aria-label="أمان عالي">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M12 4l-6 6 6 6" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </section>
 
-          {/* ==================== STATS SHOWCASE SECTION ("اعرف أين يذهب كل درهم" - فوق الباقات) ==================== */}
+          {/* ==================== 3D STATS SHOWCASE SECTION ==================== */}
           <section className="stats-showcase-section" id="stats-showcase">
-            <div className="stats-showcase-container">
-              {/* Text & Checklist Column (Right in RTL) */}
-              <div className="stats-showcase-text-col">
-                <span className="pill pill-stats-showcase" id="pill-tools"><i className="dot"></i>أدوات نجاحك</span>
-                <h2 className="stats-showcase-title">اعرف أين يذهب كل درهم</h2>
+            <div className="stats-showcase-card">
+              {/* Text Info (Right in RTL) */}
+              <div className="stats-showcase-info">
+                <span className="pill pill-top">
+                  <i className="dot"></i>أدوات نجاحك
+                </span>
+                <h2 className="stats-showcase-title">
+                  اعرف أين يذهب كل درهم.
+                </h2>
                 <p className="stats-showcase-desc">
                   تقارير مفصلة ورؤية واضحة لأداء متجرك، تساعدك على اتخاذ قرارات أفضل وزيادة أرباحك بكل ثقة.
                 </p>
                 <ul className="stats-showcase-checks">
                   <li>
-                    <i className="chk">
-                      <svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </i>
+                    <span className="chk-ico">✓</span>
                     <span>مراقبة المبيعات والمخزون</span>
                   </li>
                   <li>
-                    <i className="chk">
-                      <svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </i>
+                    <span className="chk-ico">✓</span>
                     <span>تحليل سلوك العملاء</span>
                   </li>
                   <li>
-                    <i className="chk">
-                      <svg viewBox="0 0 24 24"><path d="m6 12.6 4 4 8-9" fill="none" stroke="currentColor" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    </i>
+                    <span className="chk-ico">✓</span>
                     <span>توقعات النمو المستقبلية</span>
                   </li>
                 </ul>
@@ -381,99 +358,16 @@ export default async function HomePage() {
                 <img
                   className="img-stats-showcase"
                   src="/assets/stats_perfect@2x.png"
-                  alt="لوحة تحليلات وإحصائيات ثلاثية الأبعاد"
+                  alt="لوحة تحليلات وإحصائيات دقيقة ثلاثية الأبعاد"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
           </section>
 
           {/* ==================== PRICING SECTION (USD) ==================== */}
-          <section className="pricing-section" id="pricing">
-            <span className="pill pill-top"><i className="dot"></i>باقات الاشتراك</span>
-            <h2 className="sec-title">اختر الباقة المناسبة لمتجرك</h2>
-            <p className="sec-sub">
-              <span>خدمات استخبارات وإدارة أرباح متقدمة بدون فترات تجريبية أو رسوم خفية.</span>
-            </p>
-
-            <div className="pricing-grid">
-              {/* Starter $40 */}
-              <div className="price-card">
-                <div className="card-top">
-                  <div className="plan-header">
-                    <h3 className="plan-title">باقة البداية (Starter)</h3>
-                    <p className="plan-subtitle">للمتاجر الناشئة ورواد التجارة</p>
-                  </div>
-                  <div className="price-box">
-                    <span className="currency">$</span>
-                    <span className="amount">40</span>
-                    <span className="period">/ شهرياً</span>
-                  </div>
-                  <ul className="price-features">
-                    <li><span className="chk-icon">✓</span> متجر إلكتروني واحد متصل</li>
-                    <li><span className="chk-icon">✓</span> حتى 250 منتج نشط في المخزن</li>
-                    <li><span className="chk-icon">✓</span> حتى 1,000 طلب ومبيعة شهرياً</li>
-                    <li><span className="chk-icon">✓</span> حساب تلقائي لصافي الأرباح</li>
-                    <li><span className="chk-icon">✓</span> تنبيهات انخفاض المخزون</li>
-                  </ul>
-                </div>
-                <Link href="/sign-up" className="price-btn">اشترك في البداية ($40)</Link>
-              </div>
-
-              {/* Pro $150 (Featured) */}
-              <div className="price-card featured">
-                <div className="card-top">
-                  <div className="popular-badge">
-                    الأكثر طلباً ⭐
-                  </div>
-                  <div className="plan-header">
-                    <h3 className="plan-title">باقة المحترفين (Pro)</h3>
-                    <p className="plan-subtitle">للتجار النشطين وتوسيع المبيعات</p>
-                  </div>
-                  <div className="price-box">
-                    <span className="currency">$</span>
-                    <span className="amount">150</span>
-                    <span className="period">/ شهرياً</span>
-                  </div>
-                  <ul className="price-features">
-                    <li><span className="chk-icon">✓</span> حتى 5 متاجر إلكترونية متعددة</li>
-                    <li><span className="chk-icon">✓</span> منتجات غير محدودة بالمخزن ∞</li>
-                    <li><span className="chk-icon">✓</span> مبيعات وطلبات غير محدودة ∞</li>
-                    <li><span className="chk-icon">✓</span> تحليلات أرباح ذكية وتنبؤات AI</li>
-                    <li><span className="chk-icon">✓</span> تصدير التقارير إلى Excel و PDF</li>
-                    <li><span className="chk-icon">✓</span> دعم فني ذو أولوية 24/7</li>
-                  </ul>
-                </div>
-                <Link href="/sign-up" className="price-btn price-btn-featured">اشترك في Pro ($150)</Link>
-              </div>
-
-              {/* VIP Lifetime $250 */}
-              <div className="price-card">
-                <div className="card-top">
-                  <div className="vip-badge">
-                    دفعة واحدة للأبد 👑
-                  </div>
-                  <div className="plan-header">
-                    <h3 className="plan-title">باقة VIP مدى الحياة</h3>
-                    <p className="plan-subtitle">وصول كامل غير محدود للأبد</p>
-                  </div>
-                  <div className="price-box">
-                    <span className="currency">$</span>
-                    <span className="amount">250</span>
-                    <span className="period highlight">مرة واحدة للأبد</span>
-                  </div>
-                  <ul className="price-features">
-                    <li><span className="chk-icon">✓</span> وصول مدى الحياة بدون أي تجديد</li>
-                    <li><span className="chk-icon">✓</span> متاجر إلكترونية غير محدودة ∞</li>
-                    <li><span className="chk-icon">✓</span> منتجات ومبيعات غير محدودة ∞</li>
-                    <li><span className="chk-icon">✓</span> ربط API مخصص ومباشر</li>
-                    <li><span className="chk-icon">✓</span> مدير حساب مخصص على مدار الساعة</li>
-                    <li><span className="chk-icon">✓</span> كافة التحديثات القادمة مجاناً للأبد</li>
-                  </ul>
-                </div>
-                <Link href="/sign-up" className="price-btn">امتلك VIP للأبد ($250)</Link>
-              </div>
-            </div>
-          </section>
+          <PricingSection />
 
           {/* ==================== ABOUT & CONTACT FOOTER ==================== */}
           <footer className="site-footer" id="about">
@@ -481,17 +375,17 @@ export default async function HomePage() {
               <h3 style={{ fontSize: "calc(16 * var(--u))", fontWeight: "800", color: "var(--navy)", marginBottom: "calc(8 * var(--u))" }}>
                 رادار التاجر | شريكك الاستراتيجي في التجارة الإلكترونية
               </h3>
-              <p style={{ fontSize: "calc(10.5 * var(--u))", color: "var(--muted)", maxWidth: "calc(550 * var(--u))", margin: "0 auto calc(16 * var(--u))", lineHeight: "1.7" }}>
-                نمكن رواد الأعمال وأصحاب المتاجر الإلكترونية من التحكم الكامل في مبيعاتهم ومخزونهم ومضاعفة أرباحهم الصافية عبر أحدث أدوات التحليل الذكية.
+              <p style={{ fontSize: "calc(12 * var(--u))", color: "#627099", maxWidth: "600px", margin: "0 auto calc(16 * var(--u))", lineHeight: "1.7" }}>
+                نمكّن رواد الأعمال وأصحاب المتاجر الإلكترونية من التحكم الكامل في مبيعاتهم ومخزونهم ومضاعفة أرباحهم الصافية عبر أحدث أدوات التحليل الذكية.
               </p>
-              <div style={{ display: "flex", justifyContent: "center", gap: "calc(16 * var(--u))", fontSize: "calc(10 * var(--u))", color: "var(--ink)", marginBottom: "calc(18 * var(--u))" }}>
-                <a href="mailto:support@traders-radar.com" style={{ color: "var(--blue)", fontWeight: "700" }}>support@traders-radar.com</a>
+              <div style={{ display: "flex", justifyContent: "center", gap: "calc(20 * var(--u))", flexWrap: "wrap", fontSize: "calc(12 * var(--u))", color: "var(--blue)" }}>
+                <span>support@traders-radar.com</span>
                 <span>•</span>
                 <span>دعم فني مباشر 24/7</span>
                 <span>•</span>
                 <span>حماية مشفرة 100%</span>
               </div>
-              <p style={{ fontSize: "calc(9.5 * var(--u))", color: "var(--muted)" }}>
+              <p style={{ marginTop: "calc(20 * var(--u))", fontSize: "calc(11 * var(--u))", color: "#8a96b8" }}>
                 © 2026 رادار التاجر (Trader's Radar). جميع الحقوق محفوظة.
               </p>
             </div>
